@@ -27,6 +27,31 @@ public class BacklogItem
         _state = state;
     }
 
+    public void StartWork()
+    {
+        _state.StartWork(this);
+    }
+
+    public void MarkReadyForTesting()
+    {
+        _state.MarkReadyForTesting(this);
+    }
+
+    public void MarkTested()
+    {
+        _state.MarkTested(this);
+    }
+
+    public void ApproveDone()
+    {
+        _state.ApproveDone(this);
+    }
+
+    public void ReturnToTodo()
+    {
+        _state.ReturnToTodo(this);
+    }
+
     public string GetStateName()
     {
         return _state.GetName();

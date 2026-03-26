@@ -2,27 +2,27 @@ namespace Avans_DevOps.domain.BacklogItemState;
 
 public class TestingState : IBacklogItemState
 {
-    public void StartWork()
+    public void StartWork(BacklogItem backlogItem)
     {
         throw new NotImplementedException();
     }
 
-    public void MarkReadyForTesting()
+    public void MarkReadyForTesting(BacklogItem backlogItem)
     {
         throw new NotImplementedException();
     }
 
-    public void MarkTested()
+    public void MarkTested(BacklogItem backlogItem)
     {
         throw new NotImplementedException();
     }
 
-    public void ApproveDone()
+    public void ApproveDone(BacklogItem backlogItem)
     {
         throw new NotImplementedException();
     }
 
-    public void ReturnToTodo()
+    public void ReturnToTodo(BacklogItem backlogItem)
     {
         throw new NotImplementedException();
     }
