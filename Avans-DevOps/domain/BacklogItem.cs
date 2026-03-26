@@ -15,9 +15,7 @@ public class BacklogItem
     public string Description { get; set; }
     private IBacklogItemState _state;
     
-    
-    //TODO: Create Activity Object
-    public List<object> Activities { get; } = [];
+    public List<Activity> Activities { get; } = [];
 
     public BacklogItem(string title, string description)
     {
