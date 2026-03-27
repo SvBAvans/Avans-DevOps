@@ -1,19 +1,19 @@
-using Avans_DevOps.domain.BacklogItemState;
+using Avans_DevOps.domain.WorkableState;
 
 namespace Avans_DevOps.domain;
 
-public class BacklogItem
+public class BacklogItem : IWorkable
 {
-    public IBacklogItemState TodoState { get; } = new TodoState();
-    public IBacklogItemState DoingState { get; } = new DoingState();
-    public IBacklogItemState ReadyForTestingState { get; } = new ReadyForTestingState();
-    public IBacklogItemState TestingState { get; } = new TestedState();
-    public IBacklogItemState TestedState { get; } = new TestedState();
-    public IBacklogItemState DoneState { get; } = new DoneState();
+    public IWorkableState TodoState { get; } = new TodoState();
+    public IWorkableState DoingState { get; } = new DoingState();
+    public IWorkableState ReadyForTestingState { get; } = new ReadyForTestingState();
+    public IWorkableState TestingState { get; } = new TestedState();
+    public IWorkableState TestedState { get; } = new TestedState();
+    public IWorkableState DoneState { get; } = new DoneState();
 
     public string Title { get; set; }
     public string Description { get; set; }
-    private IBacklogItemState _state;
+    private IWorkableState _state;
     
     public List<Activity> Activities { get; } = [];
 
@@ -24,7 +24,7 @@ public class BacklogItem
         _state = TodoState;
     }
 
-    public void SetState(IBacklogItemState state)
+    public void SetState(IWorkableState state)
     {
         _state = state;
     }
@@ -37,6 +37,11 @@ public class BacklogItem
     public void MarkReadyForTesting()
     {
         _state.MarkReadyForTesting(this);
+    }
+
+    public void MarkTesting()
+    {
+        _state.MarkTesting(this);
     }
 
     public void MarkTested()
