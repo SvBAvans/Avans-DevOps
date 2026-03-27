@@ -2,6 +2,7 @@ namespace Avans_DevOps.domain;
 
 public interface IWorkable
 {
+    public string Title { get; }
     public IWorkableState TodoState { get; }
     public IWorkableState DoingState { get; }
     public IWorkableState ReadyForTestingState { get; }

@@ -10,4 +10,9 @@ project.ProductOwner = member1;
 project.AddTeamMember(member2);
 project.AddTeamMember(member3);
 
-project.AddTeamMember(member1);
+var Backlogitem1 = new BacklogItem("Login", "");
+project.AddBacklogItem(Backlogitem1);
+
+Backlogitem1.StartWork();
+Backlogitem1.MarkReadyForTesting();
+Console.WriteLine(Backlogitem1.GetStateName());

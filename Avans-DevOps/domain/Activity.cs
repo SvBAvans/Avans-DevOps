@@ -11,15 +11,15 @@ public class Activity : IWorkable
     public IWorkableState TestedState { get; } = new TestedState();
     public IWorkableState DoneState { get; } = new DoneState();
     
-    public string Name { get; set; }
+    public string Title { get; set; }
     public User Member {get; set;}
     public BacklogItem Parent { get; set; }
     
     private IWorkableState _state;
 
-    public Activity(string name, User member, BacklogItem parent)
+    public Activity(string title, User member, BacklogItem parent)
     {
-        Name = name;
+        Title = title;
         Member = member;
         Parent = parent;
         _state = TodoState;

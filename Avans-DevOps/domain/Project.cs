@@ -1,3 +1,5 @@
+using Avans_DevOps.domain.Notifications;
+
 namespace Avans_DevOps.domain;
 
 public class Project(string name, string description)
@@ -25,6 +27,12 @@ public class Project(string name, string description)
             return;
         }
         TeamMembers.Add(member);
+        
+        //TODO: check if member is tester
+        foreach (var backlogItem in ProductBacklog.BacklogItems)
+        {
+            backlogItem.Subscribe(new TesterNotifier(ProductOwner));
+        }
     }
 
     public void AddSprint(Sprint sprint)
@@ -35,5 +43,16 @@ public class Project(string name, string description)
     public void SetInactive()
     {
         IsActive = false;
+    }
+    
+    public void AddBacklogItem(BacklogItem item)
+    {
+        item.Subscribe(new ProductOwnerNotifier(ProductOwner));
+
+        //TODO: check if member is tester
+        foreach (var member in TeamMembers)
+        {
+            item.Subscribe(new TesterNotifier(member));
+        }
     }
 }
