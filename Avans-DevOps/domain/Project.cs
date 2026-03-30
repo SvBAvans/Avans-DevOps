@@ -41,7 +41,7 @@ public class Project(string name, string description)
     
     public void AddBacklogItem(BacklogItem item)
     {
-        item.Subscribe(new ProductOwnerNotifier(ProductOwner));
+        item.Subscribe(new ReturnedToTodoObserver(this));
         item.Subscribe(new ReadyForTestingObserver(this));
     }
 }

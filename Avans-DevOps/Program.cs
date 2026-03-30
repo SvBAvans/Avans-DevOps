@@ -2,7 +2,7 @@
 using Avans_DevOps.domain;
 using Avans_DevOps.domain.Notifications;
 
-var member1 = new User("Siem", "siem@example.com", true, new EmailNotificationStrategy());
+var member1 = new User("Siem", "siem@example.com", true, new SmsNotificationStrategy());
 var member2 = new User("Cas", "cas@example.com", true, new EmailNotificationStrategy());
 var member3 = new User("John", "john@example.com", true, new EmailNotificationStrategy());
 
@@ -16,3 +16,4 @@ project.AddBacklogItem(Backlogitem1);
 
 Backlogitem1.StartWork();
 Backlogitem1.MarkReadyForTesting();
+Backlogitem1.ReturnToTodo();
