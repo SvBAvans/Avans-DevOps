@@ -15,13 +15,8 @@ public abstract class SprintReportExporter
     {
         var effortPerDeveloper = new Dictionary<string, int>();
         
-        Console.WriteLine($"[TEST]: {sprint.Backlog.BacklogItems.Count}");
-        
         foreach (var backlogBacklogItem in sprint.Backlog.BacklogItems.FindAll(item => item.GetStateName() == item.DoneState.GetName()))
         {
-        Console.WriteLine($"[TEST]: {backlogBacklogItem.Member.Name}");
-            
-            
             foreach (var activity in backlogBacklogItem.Activities.Where(activity => !effortPerDeveloper.TryAdd(activity.Member.Name, 1)))
             {
                 effortPerDeveloper.Add(activity.Member.Name, 1);
@@ -33,8 +28,8 @@ public abstract class SprintReportExporter
             }
         }
         
-        // Console.WriteLine($"[TEST]: {}");
         
+        //TODO: BurndownSummary
         var data = new SprintReportData(
             sprint.Name,
             sprint.Project.Name,
