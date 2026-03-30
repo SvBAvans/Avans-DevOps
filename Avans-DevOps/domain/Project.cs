@@ -1,3 +1,5 @@
+using Avans_DevOps.domain.Notifications;
+
 namespace Avans_DevOps.domain;
 
 public class Project(string name, string description)
@@ -35,5 +37,11 @@ public class Project(string name, string description)
     public void SetInactive()
     {
         IsActive = false;
+    }
+    
+    public void AddBacklogItem(BacklogItem item)
+    {
+        item.Subscribe(new ReturnedToTodoObserver(this));
+        item.Subscribe(new ReadyForTestingObserver(this));
     }
 }
