@@ -1,6 +1,6 @@
 namespace Avans_DevOps.domain.Notifications;
 
-public interface IStateNotifier
+public interface IStateObservable
 {
     void Subscribe(IStateObserver observer);
     void Unsubscribe(IStateObserver observer);

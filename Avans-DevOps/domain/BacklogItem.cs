@@ -3,7 +3,7 @@ using Avans_DevOps.domain.WorkableState;
 
 namespace Avans_DevOps.domain;
 
-public class BacklogItem : IWorkable, IStateNotifier
+public class BacklogItem : IWorkable, IStateObservable
 {
     public IWorkableState TodoState { get; } = new TodoState();
     public IWorkableState DoingState { get; } = new DoingState();
@@ -31,16 +31,16 @@ public class BacklogItem : IWorkable, IStateNotifier
 
     public void SetState(IWorkableState state)
     {
+        var oldState = _state;
+
         _state = state;
+
+        NotifyStateChanged(this, oldState, _state);
     }
 
     public void StartWork()
-    {
-        var oldState = _state;
-        
+    {        
         _state.StartWork(this);
-        
-        NotifyStateChanged(this, oldState, _state);
     }
 
     public void MarkReadyForTesting()
