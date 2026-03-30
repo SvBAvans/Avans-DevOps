@@ -30,9 +30,9 @@ public class Project(string name, string description)
         TeamMembers.Add(member);
     }
 
-    public void AddSprint(Sprint sprint)
+    public void AddSprint(string name, DateTime startDate, DateTime endDate)
     {
-        Sprints.Add(sprint);
+        Sprints.Add(new Sprint(this, name, startDate, endDate));
     }
     
     public void SetInactive()
@@ -40,9 +40,13 @@ public class Project(string name, string description)
         IsActive = false;
     }
     
-    public void AddBacklogItem(BacklogItem item)
+    public void AddBacklogItem(string title, string description, User member)
     {
+        var item = new BacklogItem(title, description, member);
+        
         item.Subscribe(new ReturnedToTodoObserver(this));
         item.Subscribe(new ReadyForTestingObserver(this));
+        
+        ProductBacklog.AddItem(item);
     }
 }

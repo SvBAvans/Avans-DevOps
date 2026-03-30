@@ -8,7 +8,7 @@ public class BacklogItem : IWorkable, IStateObservable
     public IWorkableState TodoState { get; } = new TodoState();
     public IWorkableState DoingState { get; } = new DoingState();
     public IWorkableState ReadyForTestingState { get; } = new ReadyForTestingState();
-    public IWorkableState TestingState { get; } = new TestedState();
+    public IWorkableState TestingState { get; } = new TestingState();
     public IWorkableState TestedState { get; } = new TestedState();
     public IWorkableState DoneState { get; } = new DoneState();
 
@@ -31,6 +31,15 @@ public class BacklogItem : IWorkable, IStateObservable
         Subscribe(new LoggingNotifier());
     }
 
+    public void AddActivity(string title, User member)
+    {
+        var activity = new Activity(title, member, this);
+        
+        //TODO: subscribe observers
+
+        Activities.Add(activity);
+    }
+    
     public void SetState(IWorkableState state)
     {
         var oldState = _state;
@@ -39,6 +48,7 @@ public class BacklogItem : IWorkable, IStateObservable
 
         NotifyStateChanged(this, oldState, _state);
     }
+    
 
     public void StartWork()
     {        

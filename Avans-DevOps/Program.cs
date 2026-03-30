@@ -3,6 +3,7 @@ using Avans_DevOps.domain;
 using Avans_DevOps.domain.Notifications;
 using Avans_DevOps.domain.Pipeline;
 using Avans_DevOps.domain.Pipeline.Actions;
+using Avans_DevOps.domain.Report;
 
 var member1 = new User("Siem", "siem@example.com", true, new SmsNotificationStrategy());
 var member2 = new User("Cas", "cas@example.com", true, new EmailNotificationStrategy());
@@ -13,16 +14,17 @@ project.ProductOwner = member1;
 project.AddTeamMember(member2);
 project.AddTeamMember(member3);
 
-var Backlogitem1 = new BacklogItem("Login", "", member3);
-project.AddBacklogItem(Backlogitem1);
+project.AddBacklogItem("Login", "", member3);
+var Backlogitem1 = project.ProductBacklog.BacklogItems[0];
 
 Backlogitem1.StartWork();
 Backlogitem1.MarkReadyForTesting();
-Backlogitem1.ReturnToTodo();
+Backlogitem1.MarkTesting();
+Backlogitem1.MarkTested();
+Backlogitem1.ApproveDone();
 
-var sprint = new Sprint("Sprint 1", DateTime.Now, DateTime.Now);
-project.AddSprint(sprint);
-sprint.Backlog = project.ProductBacklog;
+project.AddSprint("Sprint 1", DateTime.Now, DateTime.Now);
+project.Sprints[0].Backlog = project.ProductBacklog;
 
 
 var actionFactory = new PipelineActionFactory();
@@ -32,4 +34,6 @@ pipeline.Add(actionFactory.CreateAction("build"));
 pipeline.Add(actionFactory.CreateAction("unit-test"));
 pipeline.Add(actionFactory.CreateAction("analysis"));
 pipeline.Add(actionFactory.CreateAction("deploy"));
-sprint.DevelopmentPipeline = pipeline;
+project.Sprints[0].DevelopmentPipeline = pipeline;
+
+new TxtSprintReportExporter().ExportReport(project.Sprints[0]);
