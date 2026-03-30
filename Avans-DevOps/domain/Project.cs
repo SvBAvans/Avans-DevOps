@@ -1,4 +1,5 @@
 using Avans_DevOps.domain.Notifications;
+using Avans_DevOps.domain.Pipeline;
 
 namespace Avans_DevOps.domain;
 

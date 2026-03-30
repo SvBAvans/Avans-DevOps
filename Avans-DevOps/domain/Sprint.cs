@@ -1,12 +1,16 @@
+using Avans_DevOps.domain.Pipeline;
+
 namespace Avans_DevOps.domain;
 
-public class Sprint(string name, DateOnly startDate, DateOnly endDate)
+public class Sprint(string name, DateTime startDate, DateTime endDate)
 {
     public string Name { get; set; } = name;
-    public DateOnly StartDate { get; set; } = startDate;
-    public DateOnly EndDate { get; set; } = endDate;
+    public DateTime StartDate { get; set; } = startDate;
+    public DateTime EndDate { get; set; } = endDate;
     
     public Backlog Backlog { get; set; } = new();
+    
+    public IPipelineComponent DevelopmentPipeline { get; set; }
     
     //TODO:
     // Types:
