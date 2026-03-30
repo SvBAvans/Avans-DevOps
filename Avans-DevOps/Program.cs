@@ -13,7 +13,7 @@ project.ProductOwner = member1;
 project.AddTeamMember(member2);
 project.AddTeamMember(member3);
 
-var Backlogitem1 = new BacklogItem("Login", "");
+var Backlogitem1 = new BacklogItem("Login", "", member3);
 project.AddBacklogItem(Backlogitem1);
 
 Backlogitem1.StartWork();

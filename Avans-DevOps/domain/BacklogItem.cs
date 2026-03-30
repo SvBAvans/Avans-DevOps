@@ -15,16 +15,18 @@ public class BacklogItem : IWorkable, IStateObservable
     public string Title { get; set; }
     public string Description { get; set; }
     private IWorkableState _state;
+    public User Member { get; }
     
     public List<Activity> Activities { get; } = [];
 
     private readonly List<IStateObserver> _observers = [];
 
-    public BacklogItem(string title, string description)
+    public BacklogItem(string title, string description, User member)
     {
         Title = title;
         Description = description;
         _state = TodoState;
+        Member = member;
         
         Subscribe(new LoggingNotifier());
     }
