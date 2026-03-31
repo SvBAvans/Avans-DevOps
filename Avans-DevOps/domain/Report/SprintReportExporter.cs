@@ -19,12 +19,12 @@ public abstract class SprintReportExporter
         {
             foreach (var activity in backlogBacklogItem.Activities.Where(activity => !effortPerDeveloper.TryAdd(activity.Member.Name, 1)))
             {
-                effortPerDeveloper.Add(activity.Member.Name, 1);
+                effortPerDeveloper[activity.Member.Name]++;
             }
 
             if (!effortPerDeveloper.TryAdd(backlogBacklogItem.Member.Name, 1))
             {
-                effortPerDeveloper.Add(backlogBacklogItem.Member.Name, 1);
+                effortPerDeveloper[backlogBacklogItem.Member.Name]++;
             }
         }
         

@@ -47,9 +47,10 @@ public class BacklogItem : IWorkable, IStateObservable
     public void AddActivity(string title, User member)
     {
         var activity = new Activity(title, member, this);
-        
-        //TODO: subscribe observers
 
+        //TODO: subscribe observers
+        activity.Subscribe(new ReturnedToTodoObserver(Project));
+        activity.Subscribe(new ReadyForTestingObserver(Project));
         Activities.Add(activity);
     }
 

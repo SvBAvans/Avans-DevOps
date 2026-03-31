@@ -1,8 +1,11 @@
+using Avans_DevOps.domain.Notifications.Observable;
+using Avans_DevOps.domain.Notifications.Observer;
 using Avans_DevOps.domain.WorkableState;
+using System;
 
 namespace Avans_DevOps.domain;
 
-public class Activity : IWorkable
+public class Activity : IWorkable, IStateObservable
 {
     public IWorkableState TodoState { get; } = new TodoState();
     public IWorkableState DoingState { get; } = new DoingState();
@@ -16,6 +19,8 @@ public class Activity : IWorkable
     public BacklogItem Parent { get; set; }
     
     private IWorkableState _state;
+    private readonly List<IStateObserver> _observers = [];
+
 
     public Activity(string title, User member, BacklogItem parent)
     {
@@ -27,8 +32,11 @@ public class Activity : IWorkable
 
     public void SetState(IWorkableState state)
     {
+        var oldState = _state;
+
         _state = state;
-        Console.WriteLine($"Activity state updated: ${state.GetName()}");
+
+        NotifyStateChanged(this, oldState, _state);
     }
 
     public void StartWork()
@@ -64,5 +72,24 @@ public class Activity : IWorkable
     public string GetStateName()
     {
         return _state.GetName();
+    }
+
+    public void Subscribe(IStateObserver observer)
+    {
+        if (!_observers.Contains(observer))
+            _observers.Add(observer);
+    }
+
+    public void Unsubscribe(IStateObserver observer)
+    {
+        _observers.Remove(observer);
+    }
+
+    public void NotifyStateChanged(IWorkable workable, IWorkableState oldState, IWorkableState newState)
+    {
+        foreach (var observer in _observers.ToList())
+        {
+            observer.OnStateChanged(workable, oldState, newState);
+        }
     }
 }

@@ -27,6 +27,12 @@ Backlogitem1.ApproveDone();
 project.AddSprint("Sprint 1", DateTime.Now, DateTime.Now);
 project.Sprints[0].Backlog = project.ProductBacklog;
 
+Backlogitem1.AddActivity("First activity", member3);
+var activity1 = Backlogitem1.Activities[0];
+activity1.StartWork();
+activity1.MarkReadyForTesting();
+activity1.MarkTesting();
+activity1.ReturnToTodo();
 
 var actionFactory = new PipelineActionFactory();
 var pipeline = new PipelineComposite("Dev pipeline");
