@@ -1,7 +1,7 @@
-using Avans_DevOps.domain.Notifications;
 using Avans_DevOps.domain.Pipeline;
 using Avans_DevOps.domain.SCM;
 using Avans_DevOps.Infrastructure;
+using Avans_DevOps.domain.Notifications.Observer;
 
 namespace Avans_DevOps.domain;
 
@@ -47,7 +47,7 @@ public class Project(string name, string description, string repositoryPath, ISc
     
     public void AddBacklogItem(string title, string description, User member)
     {
-        var item = new BacklogItem(title, description, member);
+        var item = new BacklogItem(title, description, member, this);
         
         item.Subscribe(new ReturnedToTodoObserver(this));
         item.Subscribe(new ReadyForTestingObserver(this));

@@ -1,4 +1,4 @@
-using Avans_DevOps.domain.Notifications;
+using Avans_DevOps.domain.Notifications.Strategy;
 
 namespace Avans_DevOps.domain;
 
