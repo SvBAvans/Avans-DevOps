@@ -1,4 +1,4 @@
-namespace Avans_DevOps.domain.Notifications;
+namespace Avans_DevOps.domain.Notifications.Observer;
 
 public class LoggingNotifier : IStateObserver
 {
