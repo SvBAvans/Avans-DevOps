@@ -13,9 +13,10 @@ namespace Avans_DevOps.Infrastructure
 
         public void Commit(string repositoryPath, string message)
         {
-            if (!_commitsByRepo.ContainsKey(repositoryPath))
+            if (!_commitsByRepo.TryGetValue(repositoryPath, out var commits))
             {
-                _commitsByRepo[repositoryPath] = [];
+                commits = [];
+                _commitsByRepo[repositoryPath] = commits;
             }
 
             var fakeHash = Guid.NewGuid().ToString("N")[..7];
@@ -31,12 +32,12 @@ namespace Avans_DevOps.Infrastructure
 
         public IReadOnlyCollection<CommitInfo> GetCommits(string repositoryPath)
         {
-            if (!_commitsByRepo.ContainsKey(repositoryPath))
+            if (!_commitsByRepo.TryGetValue(repositoryPath, out var commits))
             {
                 return [];
             }
 
-            return _commitsByRepo[repositoryPath].AsReadOnly();
+            return commits.AsReadOnly();
         }
     }
 }
