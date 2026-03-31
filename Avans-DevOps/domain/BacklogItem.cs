@@ -1,5 +1,6 @@
 using Avans_DevOps.domain.Notifications;
 using Avans_DevOps.domain.WorkableState;
+using Avans_DevOps.Infrastructure;
 
 namespace Avans_DevOps.domain;
 
@@ -14,6 +15,7 @@ public class BacklogItem : IWorkable, IStateObservable
 
     public string Title { get; set; }
     public string Description { get; set; }
+    public string? BranchName { get; private set; }
     private IWorkableState _state;
     public User Member { get; }
     
@@ -29,6 +31,11 @@ public class BacklogItem : IWorkable, IStateObservable
         Member = member;
         
         Subscribe(new LoggingNotifier());
+    }
+
+    public void LinkBranch(string branchName)
+    {
+        BranchName = branchName;
     }
 
     public void AddActivity(string title, User member)
