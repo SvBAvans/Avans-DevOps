@@ -37,3 +37,7 @@ pipeline.Add(actionFactory.CreateAction("deploy"));
 project.Sprints[0].DevelopmentPipeline = pipeline;
 
 new TxtSprintReportExporter().ExportReport(project.Sprints[0]);
+
+Backlogitem1.AddComment("Cas, ben jij akkoord?", member1);
+var comment1 = Backlogitem1.GetComments[0];
+comment1.AddComment("Ja hoor! LGTM", member2);

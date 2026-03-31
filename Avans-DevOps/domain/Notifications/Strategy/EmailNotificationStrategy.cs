@@ -4,7 +4,7 @@
     {
         public void Notify(User user, string message)
         {
-            Console.WriteLine("[EMAIL-NOTIFIER] - " + message);
+            Console.WriteLine($"[EMAIL-NOTIFIER] for {user.Name} - {message}");
         }
     }
 }
