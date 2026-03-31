@@ -2,6 +2,7 @@ using Avans_DevOps.domain.Discussions;
 using Avans_DevOps.domain.Notifications.Observable;
 using Avans_DevOps.domain.Notifications.Observer;
 using Avans_DevOps.domain.WorkableState;
+using Avans_DevOps.Infrastructure;
 
 namespace Avans_DevOps.domain;
 
@@ -16,6 +17,7 @@ public class BacklogItem : IWorkable, IStateObservable
 
     public string Title { get; set; }
     public string Description { get; set; }
+    public string? BranchName { get; private set; }
     private IWorkableState _state;
     public User Member { get; }
     public bool IsClosed { get; set; } = false;
@@ -35,6 +37,11 @@ public class BacklogItem : IWorkable, IStateObservable
         Project = project;
         
         Subscribe(new LoggingNotifier());
+    }
+
+    public void LinkBranch(string branchName)
+    {
+        BranchName = branchName;
     }
 
     public void AddActivity(string title, User member)

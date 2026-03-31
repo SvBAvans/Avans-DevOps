@@ -1,8 +1,11 @@
+using Avans_DevOps.domain.Pipeline;
+using Avans_DevOps.domain.SCM;
+using Avans_DevOps.Infrastructure;
 using Avans_DevOps.domain.Notifications.Observer;
 
 namespace Avans_DevOps.domain;
 
-public class Project(string name, string description)
+public class Project(string name, string description, string repositoryPath, IScmAdapter scmAdapter)
 {
     public string Name { get; } = name;
     public string Description { get; } = description;
@@ -13,6 +16,9 @@ public class Project(string name, string description)
     
     public Backlog ProductBacklog { get; } = new();
     public List<Sprint> Sprints { get; } = [];
+
+    public string RepositoryPath { get; } = repositoryPath;
+    private readonly IScmAdapter scmAdapter = scmAdapter;
     
     //TODO: 
     // - Add "Sprint overzicht"
@@ -47,5 +53,23 @@ public class Project(string name, string description)
         item.Subscribe(new ReadyForTestingObserver(this));
         
         ProductBacklog.AddItem(item);
+    }
+
+    public void CreateBranchForBacklogItem(BacklogItem item)
+    {
+        var branchName = $"feature/{item.Title}";
+        scmAdapter.CreateBranch(RepositoryPath, branchName);
+        item.LinkBranch(branchName);
+    }
+
+    public void CommitForBacklogItem(BacklogItem item, string commitDescription)
+    {
+        var message = $"{item.Title}: {commitDescription}";
+        scmAdapter.Commit(RepositoryPath, message);
+    }
+
+    public IReadOnlyCollection<CommitInfo> GetCommitHistory()
+    {
+        return scmAdapter.GetCommits(RepositoryPath);
     }
 }
