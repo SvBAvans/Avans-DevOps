@@ -1,4 +1,6 @@
-namespace Avans_DevOps.domain.Notifications;
+using Avans_DevOps.domain.Notifications.Observer;
+
+namespace Avans_DevOps.domain.Notifications.Observable;
 
 public interface IStateObservable
 {

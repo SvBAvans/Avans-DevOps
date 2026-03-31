@@ -1,4 +1,4 @@
-﻿namespace Avans_DevOps.domain.Notifications
+﻿namespace Avans_DevOps.domain.Notifications.Strategy
 {
     public class EmailNotificationStrategy : INotificationStrategy
     {

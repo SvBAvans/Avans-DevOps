@@ -1,6 +1,6 @@
 ﻿
 using Avans_DevOps.domain;
-using Avans_DevOps.domain.Notifications;
+using Avans_DevOps.domain.Notifications.Strategy;
 using Avans_DevOps.domain.Pipeline;
 using Avans_DevOps.domain.Pipeline.Actions;
 using Avans_DevOps.domain.Report;

@@ -1,6 +1,6 @@
 using Avans_DevOps.domain.WorkableState;
 
-namespace Avans_DevOps.domain.Notifications;
+namespace Avans_DevOps.domain.Notifications.Observer;
 
 public class ReturnedToTodoObserver(Project project) : IStateObserver
 {
