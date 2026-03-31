@@ -1,6 +1,6 @@
 ﻿
 using Avans_DevOps.domain;
-using Avans_DevOps.domain.Notifications;
+using Avans_DevOps.domain.Notifications.Strategy;
 using Avans_DevOps.domain.Pipeline;
 using Avans_DevOps.domain.Pipeline.Actions;
 using Avans_DevOps.domain.Report;
@@ -37,3 +37,7 @@ pipeline.Add(actionFactory.CreateAction("deploy"));
 project.Sprints[0].DevelopmentPipeline = pipeline;
 
 new TxtSprintReportExporter().ExportReport(project.Sprints[0]);
+
+Backlogitem1.AddComment("Cas, ben jij akkoord?", member1);
+var comment1 = Backlogitem1.GetComments[0];
+comment1.AddComment("Ja hoor! LGTM", member2);

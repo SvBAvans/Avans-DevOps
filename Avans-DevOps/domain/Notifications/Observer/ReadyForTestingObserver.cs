@@ -1,7 +1,6 @@
 using Avans_DevOps.domain.WorkableState;
-using System.Diagnostics.Metrics;
 
-namespace Avans_DevOps.domain.Notifications;
+namespace Avans_DevOps.domain.Notifications.Observer;
 
 public class ReadyForTestingObserver(Project project) : IStateObserver
 {

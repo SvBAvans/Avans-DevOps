@@ -1,4 +1,6 @@
-using Avans_DevOps.domain.Notifications;
+using Avans_DevOps.domain.Discussions;
+using Avans_DevOps.domain.Notifications.Observable;
+using Avans_DevOps.domain.Notifications.Observer;
 using Avans_DevOps.domain.WorkableState;
 
 namespace Avans_DevOps.domain;
@@ -16,17 +18,21 @@ public class BacklogItem : IWorkable, IStateObservable
     public string Description { get; set; }
     private IWorkableState _state;
     public User Member { get; }
+    public bool IsClosed { get; set; } = false;
+    public Project Project { get; }
     
     public List<Activity> Activities { get; } = [];
+    private readonly List<ThreadPost> _comments = [];
 
     private readonly List<IStateObserver> _observers = [];
 
-    public BacklogItem(string title, string description, User member)
+    public BacklogItem(string title, string description, User member, Project project)
     {
         Title = title;
         Description = description;
         _state = TodoState;
         Member = member;
+        Project = project;
         
         Subscribe(new LoggingNotifier());
     }
@@ -39,6 +45,26 @@ public class BacklogItem : IWorkable, IStateObservable
 
         Activities.Add(activity);
     }
+
+    public void AddComment(string content, User author)
+    {
+        if (IsClosed)
+        {
+            throw new InvalidOperationException("Cannot comment on closed backlog item");
+        }
+        
+        var post = new ThreadPost(content, this)
+        {
+            Author = author
+        };
+        
+        post.Subscribe(new CommentNotificationObserver());
+        post.NotifyPostAdded(post);
+        
+        _comments.Add(post);
+    }
+
+    public IReadOnlyList<ThreadPost> GetComments => _comments.AsReadOnly();
     
     public void SetState(IWorkableState state)
     {
