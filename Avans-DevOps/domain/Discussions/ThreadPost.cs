@@ -6,10 +6,10 @@ namespace Avans_DevOps.domain.Discussions;
 public class ThreadPost(string content, BacklogItem backlogItem) : IDiscussionObservable
 {
     public string Content { get; } = content;
-    public required User Author;
+    public required User Author { get; init; }
     private readonly List<ThreadPost> _comments = [];
     public BacklogItem BacklogItem { get; } = backlogItem;
-    public ThreadPost? ParentPost;
+    public ThreadPost? ParentPost { get; private init; }
     
     private readonly List<IDiscussionObserver> _observers = [];
 

@@ -19,7 +19,7 @@ public class BacklogItem : IWorkable, IStateObservable
     private IWorkableState _state;
     public User Member { get; }
     public bool IsClosed { get; set; } = false;
-    public Project Project;
+    public Project Project { get; }
     
     public List<Activity> Activities { get; } = [];
     private readonly List<ThreadPost> _comments = [];
