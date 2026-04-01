@@ -24,5 +24,5 @@ public class TodoState : IWorkableState
 
     public string GetName() => nameof(TodoState);
 
-    private void Invalid(string msg) => throw new InvalidOperationException(msg);
+    private static void Invalid(string msg) => throw new InvalidOperationException(msg);
 }

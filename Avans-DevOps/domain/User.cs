@@ -7,15 +7,15 @@ public class User(string name, string email, bool isTester, INotificationStrateg
     public string Name { get; } = name;
     public string Email { get; } = email;
     public bool IsTester { get; } = isTester;
+    public INotificationStrategy NotificationStrategy { get; } = notificationStrategy;
 
     public bool IsSameUser(User user)
     {
         return Email == user.Email;
     }
 
-    private INotificationStrategy notificationStrategy = notificationStrategy;
     public void SendNotification(string message)
     {
-        notificationStrategy.Notify(this, message);
+        NotificationStrategy.Notify(this, message);
     }
 }

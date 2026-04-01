@@ -11,7 +11,7 @@ public class Project(string name, string description, string repositoryPath, ISc
     public string Description { get; } = description;
     public bool IsActive { get; private set; } = true;
     
-    public User ProductOwner { get; set; }
+    public required User ProductOwner { get; set; }
     public List<User> TeamMembers { get; } = [];
     
     public Backlog ProductBacklog { get; } = new();
