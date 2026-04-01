@@ -9,8 +9,8 @@ public static class ReportTestHelper
 {
     public static Sprint CreateSprintForReport()
     {
-        var strategy = new DummyNotificationStrategy();
-        var scm = new DummyScm();
+        var strategy = new EmailNotificationStrategy();
+        var scm = new GitScm();
 
         var siem = new User("Siem", "siem@test.com", false, strategy);
         var alice = new User("Alice", "alice@test.com", false, strategy);

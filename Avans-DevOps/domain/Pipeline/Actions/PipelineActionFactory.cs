@@ -10,7 +10,7 @@ public static class PipelineActionFactory
             "build" => new BuildAction(),
             "unit-test" => new RunUnitTestAction(),
             "analysis" => new RunAnalysisAction(),
-            "deploy" => new DeplayAction(),
+            "deploy" => new DeployAction(),
             _ => throw new ArgumentException($"Unknown action type: {actionType}")
         };
     }

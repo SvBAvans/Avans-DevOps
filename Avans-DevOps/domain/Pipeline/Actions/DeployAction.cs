@@ -1,9 +1,9 @@
 namespace Avans_DevOps.domain.Pipeline.Actions;
 
-public class DeplayAction : PipelineAction
+public class DeployAction : PipelineAction
 {
     
-    public DeplayAction() : base("Deploy Application") {}
+    public DeployAction() : base("Deploy Application") {}
 
     public override void Execute()
     {

@@ -6,6 +6,6 @@ public class CheckoutSourceAction : PipelineAction
 
     public override void Execute()
     {
-        Console.WriteLine($"[Action] {Name}]");
+        Console.WriteLine($"[Action] {Name}");
     }
 }
