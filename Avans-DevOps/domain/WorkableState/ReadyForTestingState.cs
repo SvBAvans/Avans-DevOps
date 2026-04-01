@@ -3,37 +3,24 @@ namespace Avans_DevOps.domain.WorkableState;
 public class ReadyForTestingState : IWorkableState
 {
     public void StartWork(IWorkable item)
-    {
-        Console.WriteLine("ERROR: Item is already marked as ReadyForTesting");
-    }
+        => Invalid("Already ReadyForTesting");
 
     public void MarkReadyForTesting(IWorkable item)
-    {
-        Console.WriteLine("ERROR: Item is already marked as ReadyForTesting");
-    }
+        => Invalid("Already ReadyForTesting");
 
     public void MarkTesting(IWorkable item)
-    {
-        item.SetState(item.TestingState);
-    }
+        => item.SetState(item.TestingState);
 
     public void MarkTested(IWorkable item)
-    {
-        Console.WriteLine("ERROR: Item has to be tested first");
-    }
+        => Invalid("Must be in Testing first");
 
     public void ApproveDone(IWorkable item)
-    {
-        Console.WriteLine("ERROR: Item is already marked as ReadyForTesting");
-    }
+        => Invalid("Must be Tested first");
 
     public void ReturnToTodo(IWorkable item)
-    {
-        item.SetState(item.TodoState);
-    }
+        => item.SetState(item.TodoState);
 
-    public string GetName()
-    {
-        return GetType().ToString().Split(".").Last();
-    }
+    public string GetName() => nameof(ReadyForTestingState);
+
+    private void Invalid(string msg) => throw new InvalidOperationException(msg);
 }

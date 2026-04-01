@@ -8,32 +8,21 @@ public class TodoState : IWorkableState
     }
 
     public void MarkReadyForTesting(IWorkable item)
-    {
-        Console.WriteLine("ERROR: Cannot skip states");
-    }
+        => Invalid("Cannot skip from Todo to ReadyForTesting");
 
     public void MarkTesting(IWorkable item)
-    {
-        Console.WriteLine("ERROR: Cannot skip states");
-    }
+        => Invalid("Cannot skip from Todo to Testing");
 
     public void MarkTested(IWorkable item)
-    {
-        Console.WriteLine("ERROR: Cannot skip states");
-    }
+        => Invalid("Cannot skip from Todo to Tested");
 
     public void ApproveDone(IWorkable item)
-    {
-        Console.WriteLine("ERROR: Cannot skip states");
-    }
+        => Invalid("Cannot skip from Todo to Done");
 
     public void ReturnToTodo(IWorkable item)
-    {
-        Console.WriteLine("ERROR: Item is already marked as TODO");
-    }
+        => Invalid("Item is already in Todo");
 
-    public string GetName()
-    {
-        return GetType().ToString().Split(".").Last();
-    }
+    public string GetName() => nameof(TodoState);
+
+    private void Invalid(string msg) => throw new InvalidOperationException(msg);
 }

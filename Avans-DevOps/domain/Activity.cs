@@ -1,7 +1,6 @@
 using Avans_DevOps.domain.Notifications.Observable;
 using Avans_DevOps.domain.Notifications.Observer;
 using Avans_DevOps.domain.WorkableState;
-using System;
 
 namespace Avans_DevOps.domain;
 
