@@ -10,8 +10,11 @@ var member1 = new User("Siem", "siem@example.com", true, new SmsNotificationStra
 var member2 = new User("Cas", "cas@example.com", true, new EmailNotificationStrategy());
 var member3 = new User("John", "john@example.com", true, new EmailNotificationStrategy());
 
-var project = new Project("Avans One", "Een betere versie van de slechte avans app.", "C:/repos/avans-devops", new GitScm());
-project.ProductOwner = member1;
+var project = new Project("Avans One", "Een betere versie van de slechte avans app.", "C:/repos/avans-devops",
+    new GitScm())
+{
+    ProductOwner = member1
+};
 project.AddTeamMember(member2);
 project.AddTeamMember(member3);
 
@@ -34,13 +37,12 @@ activity1.MarkReadyForTesting();
 activity1.MarkTesting();
 activity1.ReturnToTodo();
 
-var actionFactory = new PipelineActionFactory();
 var pipeline = new PipelineComposite("Dev pipeline");
-pipeline.Add(actionFactory.CreateAction("checkout"));
-pipeline.Add(actionFactory.CreateAction("build"));
-pipeline.Add(actionFactory.CreateAction("unit-test"));
-pipeline.Add(actionFactory.CreateAction("analysis"));
-pipeline.Add(actionFactory.CreateAction("deploy"));
+pipeline.Add(PipelineActionFactory.CreateAction("checkout"));
+pipeline.Add(PipelineActionFactory.CreateAction("build"));
+pipeline.Add(PipelineActionFactory.CreateAction("unit-test"));
+pipeline.Add(PipelineActionFactory.CreateAction("analysis"));
+pipeline.Add(PipelineActionFactory.CreateAction("deploy"));
 project.Sprints[0].DevelopmentPipeline = pipeline;
 
 new TxtSprintReportExporter().ExportReport(project.Sprints[0]);

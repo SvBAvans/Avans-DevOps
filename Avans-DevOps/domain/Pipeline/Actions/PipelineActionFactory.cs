@@ -1,8 +1,8 @@
 namespace Avans_DevOps.domain.Pipeline.Actions;
 
-public class PipelineActionFactory
+public static class PipelineActionFactory
 {
-    public IPipelineComponent CreateAction(string actionType)
+    public static IPipelineComponent CreateAction(string actionType)
     {
         return actionType switch
         {

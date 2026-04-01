@@ -22,5 +22,5 @@ public class TestingState : IWorkableState
 
     public string GetName() => nameof(TestingState);
 
-    private void Invalid(string msg) => throw new InvalidOperationException(msg);
+    private static void Invalid(string msg) => throw new InvalidOperationException(msg);
 }

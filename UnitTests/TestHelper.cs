@@ -22,7 +22,10 @@ public static class TestHelper
     public static BacklogItem CreateItem()
     {
         var user = new User("Test", "test@test.com", false, new DummyNotificationStrategy());
-        var project = new Project("Test", "Desc", "repo", new DummyScm());
+        var project = new Project("Test", "Desc", "repo", new DummyScm())
+        {
+            ProductOwner = user
+        };
 
         return new BacklogItem("Title", "Desc", user, project);
     }
