@@ -9,7 +9,7 @@ public class Activity : IWorkable, IStateObservable
     public IWorkableState TodoState { get; } = new TodoState();
     public IWorkableState DoingState { get; } = new DoingState();
     public IWorkableState ReadyForTestingState { get; } = new ReadyForTestingState();
-    public IWorkableState TestingState { get; } = new TestedState();
+    public IWorkableState TestingState { get; } = new TestingState();
     public IWorkableState TestedState { get; } = new TestedState();
     public IWorkableState DoneState { get; } = new DoneState();
     

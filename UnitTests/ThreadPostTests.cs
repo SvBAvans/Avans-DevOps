@@ -80,4 +80,46 @@ public class ThreadPostTests
         Assert.Throws<InvalidOperationException>(() =>
             parentPost.AddComment("Reply message", author));
     }
+
+    [Fact]
+    public void Subscribe_AddComment_CallsObserver()
+    {
+        var author = new User("Alice", "alice@test.com", false, new EmailNotificationStrategy());
+        var item = TestHelper.CreateItem();
+
+        var parentPost = new ThreadPost("Original post", item)
+        {
+            Author = author
+        };
+
+        var observer = new SpyDiscussionObserver();
+        parentPost.Subscribe(observer);
+
+        parentPost.AddComment("Reply message", author);
+
+        Assert.Equal(1, observer.CallCount);
+        Assert.NotNull(observer.LastPost);
+        Assert.Equal("Reply message", observer.LastPost!.Content);
+    }
+
+    [Fact]
+    public void Unsubscribe_AddComment_DoesNotCallObserver()
+    {
+        var author = new User("Alice", "alice@test.com", false, new EmailNotificationStrategy());
+        var item = TestHelper.CreateItem();
+
+        var parentPost = new ThreadPost("Original post", item)
+        {
+            Author = author
+        };
+
+        var observer = new SpyDiscussionObserver();
+        parentPost.Subscribe(observer);
+        parentPost.Unsubscribe(observer);
+
+        parentPost.AddComment("Reply message", author);
+
+        Assert.Equal(0, observer.CallCount);
+        Assert.Null(observer.LastPost);
+    }
 }
