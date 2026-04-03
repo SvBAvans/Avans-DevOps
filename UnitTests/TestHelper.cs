@@ -14,7 +14,7 @@ public static class TestHelper
             ProductOwner = user
         };
 
-        return new BacklogItem("Title", "Desc", user, project);
+        return new BacklogItem("Title", "Desc", user, project, 10);
     }
 
     public static BacklogItem CreateDoingItem()

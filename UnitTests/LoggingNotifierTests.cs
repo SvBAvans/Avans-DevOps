@@ -21,7 +21,7 @@ public class LoggingNotifierTests
             ProductOwner = po
         };
 
-        var item = new BacklogItem("Feature C", "Desc", user, project);
+        var item = new BacklogItem("Feature C", "Desc", user, project, 10);
 
         var notifier = new LoggingNotifier();
 

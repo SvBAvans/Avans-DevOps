@@ -85,7 +85,7 @@ public class ProjectTests
         var member = CreateUser("Alice");
         project.AddTeamMember(member);
 
-        project.AddBacklogItem("Feature A", "Implement feature A", member);
+        project.AddBacklogItem("Feature A", "Implement feature A", member, 10);
 
         Assert.Single(project.ProductBacklog.BacklogItems);
         Assert.Equal("Feature A", project.ProductBacklog.BacklogItems[0].Title);
@@ -100,7 +100,7 @@ public class ProjectTests
         var project = CreateProject(scm);
         var member = CreateUser("Alice");
 
-        var item = new BacklogItem("LoginFeature", "Implement login", member, project);
+        var item = new BacklogItem("LoginFeature", "Implement login", member, project, 10);
 
         project.CreateBranchForBacklogItem(item);
 
@@ -116,7 +116,7 @@ public class ProjectTests
         var project = CreateProject(scm);
         var member = CreateUser("Alice");
 
-        var item = new BacklogItem("LoginFeature", "Implement login", member, project);
+        var item = new BacklogItem("LoginFeature", "Implement login", member, project, 10);
 
         project.CommitForBacklogItem(item, "Added validation");
 

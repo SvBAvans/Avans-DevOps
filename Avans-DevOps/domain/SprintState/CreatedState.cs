@@ -4,9 +4,9 @@ namespace Avans_DevOps.domain.SprintState;
 
 public class CreatedState(Sprint sprint) : ISprintState
 {
-    public void AddBacklogItem(string name, string description, User member, Project project)
+    public void AddBacklogItem(string name, string description, User member, Project project, int effortPoints)
     {
-        var item = new BacklogItem(name, description, member, project);
+        var item = new BacklogItem(name, description, member, project, effortPoints);
         
         item.Subscribe(new ReturnedToTodoObserver(sprint));
         item.Subscribe(new ReadyForTestingObserver(project));

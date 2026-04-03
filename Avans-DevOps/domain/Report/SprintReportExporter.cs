@@ -24,19 +24,17 @@ public abstract class SprintReportExporter
 
             if (!effortPerDeveloper.TryAdd(backlogBacklogItem.Member.Name, 1))
             {
-                effortPerDeveloper[backlogBacklogItem.Member.Name]++;
+                effortPerDeveloper[backlogBacklogItem.Member.Name] += backlogBacklogItem.EffortPoints;
             }
         }
         
         
-        //TODO: BurndownSummary
         var data = new SprintReportData(
             sprint.Name,
             sprint.Project.Name,
             DateTime.Now,
             sprint.Project.TeamMembers,
-            effortPerDeveloper,
-            null
+            effortPerDeveloper
             );
 
         return data;

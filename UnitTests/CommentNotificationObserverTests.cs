@@ -24,7 +24,7 @@ public class CommentNotificationObserverTests
         project.TeamMembers.Add(author);
         project.TeamMembers.Add(teammate);
 
-        var item = new BacklogItem("Feature D", "Desc", author, project);
+        var item = new BacklogItem("Feature D", "Desc", author, project, 10);
 
         var post = new ThreadPost("This needs clarification", item)
         {
@@ -56,7 +56,7 @@ public class CommentNotificationObserverTests
 
         project.TeamMembers.Add(teammate);
 
-        var item = new BacklogItem("Feature E", "Desc", teammate, project);
+        var item = new BacklogItem("Feature E", "Desc", teammate, project, 10);
 
         var post = new ThreadPost("PO feedback", item)
         {
@@ -89,7 +89,7 @@ public class CommentNotificationObserverTests
         project.TeamMembers.Add(author);
         project.TeamMembers.Add(teammate);
 
-        var item = new BacklogItem("Feature F", "Desc", author, project);
+        var item = new BacklogItem("Feature F", "Desc", author, project, 10);
 
         var parentPost = new ThreadPost("Original post", item)
         {

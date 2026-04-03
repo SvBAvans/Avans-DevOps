@@ -19,7 +19,7 @@ public static class ActivityTestHelper
             ProductOwner = productOwner
         };
 
-        var backlogItem = new BacklogItem("Feature A", "Description", member, project);
+        var backlogItem = new BacklogItem("Feature A", "Description", member, project, 10);
 
         return new Activity("Activity 1", member, backlogItem);
     }

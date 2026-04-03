@@ -21,19 +21,21 @@ public class BacklogItem : IWorkable, IStateObservable
     public User Member { get; }
     public bool IsClosed { get; set; } = false;
     public Project Project { get; }
+    public int EffortPoints { get; }
     
     public List<Activity> Activities { get; } = [];
     private readonly List<ThreadPost> _comments = [];
 
     private readonly List<IStateObserver> _observers = [];
 
-    public BacklogItem(string title, string description, User member, Project project)
+    public BacklogItem(string title, string description, User member, Project project, int effortPoints)
     {
         Title = title;
         Description = description;
         _state = TodoState;
         Member = member;
         Project = project;
+        EffortPoints = effortPoints;
         
         Subscribe(new LoggingNotifier());
     }

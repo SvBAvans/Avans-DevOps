@@ -1,21 +1,15 @@
 namespace Avans_DevOps.domain.Report;
 
-public class SprintReportData
+public class SprintReportData(
+    string sprintName,
+    string projectName,
+    DateTime reportDate,
+    List<User> teamMembers,
+    Dictionary<string, int> effortPerDeveloper)
 {
-    public string SprintName { get; }
-    public string ProjectName { get; }
-    public DateTime ReportDate { get; }
-    public List<User> TeamMembers { get; }
-    public Dictionary<string, int> EffortPerDeveloper { get; }
-    public string BurndownSummary { get; }
-
-    public SprintReportData(string sprintName, string projectName, DateTime reportDate, List<User> teamMembers, Dictionary<string, int> effortPerDeveloper, string burndownSummary)
-    {
-        SprintName = sprintName;
-        ProjectName = projectName;
-        ReportDate = reportDate;
-        TeamMembers = teamMembers;
-        EffortPerDeveloper = effortPerDeveloper;
-        BurndownSummary = burndownSummary;
-    }
+    public string SprintName { get; } = sprintName;
+    public string ProjectName { get; } = projectName;
+    public DateTime ReportDate { get; } = reportDate;
+    public List<User> TeamMembers { get; } = teamMembers;
+    public Dictionary<string, int> EffortPerDeveloper { get; } = effortPerDeveloper;
 }

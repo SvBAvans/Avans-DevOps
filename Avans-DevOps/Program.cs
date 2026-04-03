@@ -18,7 +18,7 @@ var project = new Project("Avans One", "Een betere versie van de slechte avans a
 project.AddTeamMember(member2);
 project.AddTeamMember(member3);
 
-project.AddBacklogItem("Login", "", member3);
+project.AddBacklogItem("Login", "", member3, 10);
 var Backlogitem1 = project.ProductBacklog.BacklogItems[0];
 
 Backlogitem1.StartWork();

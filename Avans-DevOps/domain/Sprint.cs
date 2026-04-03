@@ -44,9 +44,9 @@ public class Sprint
         _state = state;
     }
 
-    public void AddBacklogItem(string name, string description, User member, Project project)
+    public void AddBacklogItem(string name, string description, User member, Project project, int effortPoints)
     {
-        _state.AddBacklogItem(name, description, member, project);
+        _state.AddBacklogItem(name, description, member, project, effortPoints);
     }
 
     public void MarkInExecution()

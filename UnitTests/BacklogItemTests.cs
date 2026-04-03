@@ -1,7 +1,6 @@
 ﻿using Avans_DevOps.domain;
 using Avans_DevOps.domain.Notifications.Strategy;
 using Avans_DevOps.Infrastructure;
-using Xunit;
 
 namespace UnitTests;
 
@@ -18,7 +17,7 @@ public class BacklogItemTests
 
         project.AddTeamMember(author);
 
-        var item = new BacklogItem("Feature A", "Description", author, project);
+        var item = new BacklogItem("Feature A", "Description", author, project, 10);
 
         item.AddComment("This needs clarification", author);
 
@@ -40,7 +39,7 @@ public class BacklogItemTests
             ProductOwner = new User("PO", "po@test.com", false, new EmailNotificationStrategy())
         };
 
-        var item = new BacklogItem("Feature A", "Description", author, project)
+        var item = new BacklogItem("Feature A", "Description", author, project, 10)
         {
             IsClosed = true
         };
@@ -69,7 +68,7 @@ public class BacklogItemTests
         project.AddTeamMember(author);
         project.AddTeamMember(teammate);
 
-        var item = new BacklogItem("Feature A", "Description", author, project);
+        var item = new BacklogItem("Feature A", "Description", author, project, 10);
 
         var output = ConsoleTestHelper.CaptureConsoleOutput(() =>
             item.AddComment("This needs clarification", author));

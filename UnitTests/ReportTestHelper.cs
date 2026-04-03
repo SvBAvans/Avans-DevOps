@@ -33,7 +33,7 @@ public static class ReportTestHelper
         var alice = sprint.Project.TeamMembers[0];
         var bob = sprint.Project.TeamMembers[1];
 
-        var item1 = new BacklogItem("Login feature", "Implement login", alice, sprint.Project);
+        var item1 = new BacklogItem("Login feature", "Implement login", alice, sprint.Project, 10);
         item1.AddActivity("Create login form", alice);
         item1.AddActivity("Validate credentials", bob);
 
@@ -61,7 +61,7 @@ public static class ReportTestHelper
         item1.MarkTested();
         item1.ApproveDone();
 
-        var item2 = new BacklogItem("Register feature", "Implement registration", bob, sprint.Project);
+        var item2 = new BacklogItem("Register feature", "Implement registration", bob, sprint.Project, 10);
         item2.AddActivity("Create registration form", bob);
 
         foreach (var activity in item2.Activities)

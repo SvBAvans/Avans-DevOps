@@ -26,7 +26,7 @@ public class ReadyForTestingObserverTests
         project.TeamMembers.Add(tester);
         project.TeamMembers.Add(developer);
 
-        var item = new BacklogItem("Feature A", "Desc", developer, project);
+        var item = new BacklogItem("Feature A", "Desc", developer, project, 10);
 
         var observer = new ReadyForTestingObserver(project);
 
@@ -57,7 +57,7 @@ public class ReadyForTestingObserverTests
         project.TeamMembers.Add(tester);
         project.TeamMembers.Add(developer);
 
-        var item = new BacklogItem("Feature A", "Desc", developer, project);
+        var item = new BacklogItem("Feature A", "Desc", developer, project, 10);
         var observer = new ReadyForTestingObserver(project);
 
         var output = ConsoleTestHelper.CaptureConsoleOutput(() =>

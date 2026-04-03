@@ -48,9 +48,9 @@ public class Project(string name, string description, string repositoryPath, ISc
         IsActive = false;
     }
     
-    public void AddBacklogItem(string title, string description, User member)
+    public void AddBacklogItem(string title, string description, User member, int effortPoints)
     {
-        var item = new BacklogItem(title, description, member, this);
+        var item = new BacklogItem(title, description, member, this, effortPoints);
         
         item.Subscribe(new ReadyForTestingObserver(this));
         

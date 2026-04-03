@@ -27,7 +27,7 @@ public class ReturnedToTodoObserverTests
         project.AddSprint("Sprint 1", DateTime.Now, DateTime.Now.AddDays(7), Sprint.SprintType.DEVELOPMENT, scrumMaster);
         var sprint = project.Sprints.First();
         
-        var item = new BacklogItem("Feature B", "Desc", developer, project);
+        var item = new BacklogItem("Feature B", "Desc", developer, project, 10);
         var observer = new ReturnedToTodoObserver(sprint);
 
         var output = ConsoleTestHelper.CaptureConsoleOutput(() =>
@@ -59,7 +59,7 @@ public class ReturnedToTodoObserverTests
         var sprint = project.Sprints.First();
 
 
-        var item = new BacklogItem("Feature B", "Desc", developer, project);
+        var item = new BacklogItem("Feature B", "Desc", developer, project, 10);
         var observer = new ReturnedToTodoObserver(sprint);
 
         var output = ConsoleTestHelper.CaptureConsoleOutput(() =>
