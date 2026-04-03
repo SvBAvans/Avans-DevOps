@@ -40,32 +40,32 @@ public class Activity : IWorkable, IStateObservable
 
     public void StartWork()
     {
-        _state.StartWork(this);
+        ExecuteIfAllowed(() => _state.StartWork(this));
     }
 
     public void MarkReadyForTesting()
     {
-        _state.MarkReadyForTesting(this);
+        ExecuteIfAllowed(() => _state.MarkReadyForTesting(this));
     }
     
     public void MarkTesting()
     {
-        _state.MarkTesting(this);
+        ExecuteIfAllowed(() => _state.MarkTesting(this));
     }
 
     public void MarkTested()
     {
-        _state.MarkTested(this);
+        ExecuteIfAllowed(() => _state.MarkTested(this));
     }
 
     public void ApproveDone()
     {
-        _state.ApproveDone(this);
+        ExecuteIfAllowed(() => _state.ApproveDone(this));
     }
 
     public void ReturnToTodo()
     {
-        _state.ReturnToTodo(this);
+        ExecuteIfAllowed(() => _state.ReturnToTodo(this));
     }
 
     public string GetStateName()
@@ -84,6 +84,16 @@ public class Activity : IWorkable, IStateObservable
         _observers.Remove(observer);
     }
 
+    private void ExecuteIfAllowed(Action action)
+    {
+        if (Parent.IsClosed)
+        {
+            throw new InvalidOperationException("BacklogItem is closed");
+        }
+
+        action();
+    }
+    
     public void NotifyStateChanged(IWorkable workable, IWorkableState oldState, IWorkableState newState)
     {
         foreach (var observer in _observers.ToList())

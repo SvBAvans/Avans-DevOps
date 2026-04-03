@@ -2,7 +2,6 @@ using Avans_DevOps.domain.Discussions;
 using Avans_DevOps.domain.Notifications.Observable;
 using Avans_DevOps.domain.Notifications.Observer;
 using Avans_DevOps.domain.WorkableState;
-using Avans_DevOps.Infrastructure;
 
 namespace Avans_DevOps.domain;
 
@@ -47,8 +46,7 @@ public class BacklogItem : IWorkable, IStateObservable
     public void AddActivity(string title, User member)
     {
         var activity = new Activity(title, member, this);
-
-        //TODO: subscribe observers
+        
         activity.Subscribe(new ReturnedToTodoObserver(Project));
         activity.Subscribe(new ReadyForTestingObserver(Project));
         Activities.Add(activity);
@@ -106,6 +104,10 @@ public class BacklogItem : IWorkable, IStateObservable
 
     public void ApproveDone()
     {
+        if (Activities.Exists(activity => activity.GetStateName() != nameof(DoneState)))
+        {
+            throw new InvalidOperationException("Not all activities are marked as 'Done'");
+        }
         _state.ApproveDone(this);
     }
 
