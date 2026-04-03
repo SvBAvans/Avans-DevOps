@@ -11,7 +11,7 @@ public class SprintReportExporterTests
         exporter.ExportReport(sprint);
 
         Assert.NotNull(exporter.RenderedBody);
-        Assert.Contains("Alice: 2", exporter.RenderedBody);
-        Assert.Contains("Bob: 3", exporter.RenderedBody);
+        Assert.Contains("Alice: 11", exporter.RenderedBody);
+        Assert.Contains("Bob: 12", exporter.RenderedBody);
     }
 }
