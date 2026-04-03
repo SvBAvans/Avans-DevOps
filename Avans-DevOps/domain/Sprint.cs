@@ -64,6 +64,12 @@ public class Sprint
         _state.MarkFinished();
     }
 
+    public string GetStateName()
+    {
+        return _state.GetStateName();
+    }
+
+
     public enum SprintType
     {
         REVIEW,

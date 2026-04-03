@@ -21,4 +21,7 @@ public class InExecutionState(Sprint sprint) : ISprintState
     {
         sprint.SetState(sprint.FinishedState);
     }
+
+    public string GetStateName() => nameof(InExecutionState);
+
 }

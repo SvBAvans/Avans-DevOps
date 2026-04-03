@@ -21,4 +21,7 @@ public class FinishedState(Sprint sprint) : ISprintState
     {
         throw new InvalidOperationException("Sprint is already finished.");
     }
+
+    public string GetStateName() => nameof(FinishedState);
+
 }

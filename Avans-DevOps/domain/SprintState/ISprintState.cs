@@ -9,4 +9,6 @@ public interface ISprintState
     void MarkInReview();
     
     void MarkFinished();
+
+    string GetStateName();
 }

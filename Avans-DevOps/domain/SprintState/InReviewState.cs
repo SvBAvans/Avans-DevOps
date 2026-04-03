@@ -21,4 +21,7 @@ public class InReviewState(Sprint sprint) : ISprintState
     {
         sprint.SetState(sprint.FinishedState);
     }
+
+    public string GetStateName() => nameof(InReviewState);
+
 }

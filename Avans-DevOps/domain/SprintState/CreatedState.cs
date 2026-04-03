@@ -1,4 +1,5 @@
 using Avans_DevOps.domain.Notifications.Observer;
+using Avans_DevOps.domain.WorkableState;
 
 namespace Avans_DevOps.domain.SprintState;
 
@@ -28,4 +29,6 @@ public class CreatedState(Sprint sprint) : ISprintState
     {
         sprint.SetState(sprint.FinishedState);
     }
+
+    public string GetStateName() => nameof(CreatedState);
 }
