@@ -35,9 +35,9 @@ public class Project(string name, string description, string repositoryPath, ISc
         TeamMembers.Add(member);
     }
 
-    public void AddSprint(string name, DateTime startDate, DateTime endDate)
+    public void AddSprint(string name, DateTime startDate, DateTime endDate, Sprint.SprintType sprintType)
     {
-        Sprints.Add(new Sprint(this, name, startDate, endDate));
+        Sprints.Add(new Sprint(this, name, startDate, endDate, sprintType));
     }
     
     public void SetInactive()

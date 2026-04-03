@@ -62,7 +62,7 @@ public class ProjectTests
     {
         var project = CreateProject();
 
-        project.AddSprint("Sprint 1", new DateTime(2025, 1, 1), new DateTime(2025, 1, 14));
+        project.AddSprint("Sprint 1", new DateTime(2025, 1, 1), new DateTime(2025, 1, 14), Sprint.SprintType.DEVELOPMENT);
 
         Assert.Single(project.Sprints);
         Assert.Equal("Sprint 1", project.Sprints[0].Name);

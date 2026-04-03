@@ -22,7 +22,7 @@ public static class ReportTestHelper
         project.TeamMembers.Add(alice);
         project.TeamMembers.Add(bob);
 
-        var sprint = new Sprint(project, "Sprint 1", DateTime.Now, DateTime.Now.AddDays(7));
+        var sprint = new Sprint(project, "Sprint 1", DateTime.Now, DateTime.Now.AddDays(7), Sprint.SprintType.DEVELOPMENT);
 
         return sprint;
     }

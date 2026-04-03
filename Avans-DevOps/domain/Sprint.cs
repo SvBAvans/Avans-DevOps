@@ -1,17 +1,66 @@
 using Avans_DevOps.domain.Pipeline;
+using Avans_DevOps.domain.SprintState;
 
 namespace Avans_DevOps.domain;
 
-public class Sprint(Project project, string name, DateTime startDate, DateTime endDate)
+public class Sprint
 {
-    public string Name { get; set; } = name;
-    public DateTime StartDate { get; set; } = startDate;
-    public DateTime EndDate { get; set; } = endDate;
-    public Project Project { get; } = project;
+    public ISprintState CreatedState { get; }
+    public ISprintState InExecutionState { get; }
+    public ISprintState FinishedState { get; }
+    
+    public string Name { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
+    public Project Project { get; }
+    public SprintType Type { get; }
+
+    private ISprintState _state;
     
     public Backlog Backlog { get; set; } = new();
     
-    public IPipelineComponent DevelopmentPipeline { get; set; }
+    public IPipelineComponent? DevelopmentPipeline { get; set; }
+
+    public Sprint(Project project, string name, DateTime startDate, DateTime endDate, SprintType sprintType)
+    {
+        Project = project;
+        Name = name;
+        StartDate = startDate;
+        EndDate = endDate;
+        Type = sprintType;
+
+        CreatedState = new CreatedState(this);
+        InExecutionState = new InExecutionState(this);
+        FinishedState = new FinishedState(this);
+        
+        _state = CreatedState;
+    }
+
+    internal void SetState(ISprintState state)
+    {
+        _state = state;
+    }
+
+    public void AddBacklogItem(string name, string description, User member, Project project)
+    {
+        _state.AddBacklogItem(name, description, member, project);
+    }
+
+    public void MarkInExecution()
+    {
+        _state.MarkInExecution();
+    }
+
+    public void MarkFinished()
+    {
+        _state.MarkFinished();
+    }
+
+    public enum SprintType
+    {
+        REVIEW,
+        DEVELOPMENT,
+    }
     
     //TODO:
     // Types:
