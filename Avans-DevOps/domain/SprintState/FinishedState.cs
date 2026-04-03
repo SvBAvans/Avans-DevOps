@@ -12,6 +12,11 @@ public class FinishedState(Sprint sprint) : ISprintState
         throw new InvalidOperationException("Finished sprint cannot be modified anymore.");
     }
 
+    public void MarkInReview()
+    {
+        throw new InvalidOperationException("Finished sprint cannot be modified anymore.");
+    }
+
     public void MarkFinished()
     {
         throw new InvalidOperationException("Sprint is already finished.");

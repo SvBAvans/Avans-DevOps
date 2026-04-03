@@ -1,20 +1,20 @@
 namespace Avans_DevOps.domain.SprintState;
 
-public class InExecutionState(Sprint sprint) : ISprintState
+public class InReviewState(Sprint sprint) : ISprintState
 {
     public void AddBacklogItem(string name, string description, User member, Project project)
     {
-        throw new InvalidOperationException("Sprint can not be modified while in execution");
+        throw new InvalidOperationException("Sprint is in review");
     }
 
     public void MarkInExecution()
     {
-        throw new InvalidOperationException("Sprint cannot be modified while in execution");
+        throw new InvalidOperationException("Sprint is in review");
     }
 
     public void MarkInReview()
     {
-        sprint.SetState(sprint.InReviewState);
+        throw new InvalidOperationException("Sprint is in review");
     }
 
     public void MarkFinished()

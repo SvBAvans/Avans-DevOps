@@ -19,6 +19,11 @@ public class CreatedState(Sprint sprint) : ISprintState
         sprint.SetState(sprint.InExecutionState);
     }
 
+    public void MarkInReview()
+    {
+        sprint.SetState(sprint.InReviewState);
+    }
+
     public void MarkFinished()
     {
         sprint.SetState(sprint.FinishedState);

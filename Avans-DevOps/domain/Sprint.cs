@@ -7,6 +7,7 @@ public class Sprint
 {
     public ISprintState CreatedState { get; }
     public ISprintState InExecutionState { get; }
+    public ISprintState InReviewState { get; }
     public ISprintState FinishedState { get; }
     
     public string Name { get; set; }
@@ -32,6 +33,7 @@ public class Sprint
 
         CreatedState = new CreatedState(this);
         InExecutionState = new InExecutionState(this);
+        InReviewState = new InReviewState(this);
         FinishedState = new FinishedState(this);
         
         _state = CreatedState;
@@ -50,6 +52,11 @@ public class Sprint
     public void MarkInExecution()
     {
         _state.MarkInExecution();
+    }
+
+    public void StartReview()
+    {
+        _state.MarkInReview();
     }
 
     public void MarkFinished()

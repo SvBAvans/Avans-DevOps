@@ -5,6 +5,8 @@ public interface ISprintState
     void AddBacklogItem(string name, string description, User member, Project project);
 
     void MarkInExecution();
+
+    void MarkInReview();
     
     void MarkFinished();
 }

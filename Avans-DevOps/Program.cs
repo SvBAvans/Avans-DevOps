@@ -45,6 +45,9 @@ pipeline.Add(PipelineActionFactory.CreateAction("analysis"));
 pipeline.Add(PipelineActionFactory.CreateAction("deploy"));
 project.Sprints[0].DevelopmentPipeline = pipeline;
 
+project.Sprints.First().DevelopmentPipeline.Execute();
+project.Sprints.First().MarkFinished();
+
 new TxtSprintReportExporter().ExportReport(project.Sprints[0]);
 
 Console.WriteLine("----- SCM -----");
