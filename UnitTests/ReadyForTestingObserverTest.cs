@@ -18,16 +18,13 @@ public class ReadyForTestingObserverTests
         var developer = new User("Developer", "dev@test.com", false, strategy);
         var productOwner = new User("PO", "po@test.com", false, strategy);
 
-        var user = new User("Test", "test@test.com", false, new EmailNotificationStrategy());
-
         var project = new Project("Project X", "Desc", "repo", new GitScm())
         {
-            ProductOwner = user
+            ProductOwner = productOwner
         };
 
         project.TeamMembers.Add(tester);
         project.TeamMembers.Add(developer);
-        project.ProductOwner = productOwner;
 
         var item = new BacklogItem("Feature A", "Desc", developer, project);
 

@@ -10,31 +10,31 @@ namespace UnitTests;
 public class ReturnedToTodoObserverTests
 {
     [Fact]
-    public void OnStateChanged_ToTodo_NotifiesProductOwner()
+    public void OnStateChanged_ToTodo_NotifiesScrumMaster()
     {
         var strategy = new EmailNotificationStrategy();
 
         var productOwner = new User("PO", "po@test.com", false, strategy);
         var developer = new User("Dev", "dev@test.com", false, strategy);
-
-        var user = new User("Test", "test@test.com", false, new EmailNotificationStrategy());
+        var scrumMaster = new User("ScrumMaster", "amaster@test.com", false, strategy);
 
         var project = new Project("Project X", "Desc", "repo", new GitScm())
         {
-            ProductOwner = user
+            ProductOwner = productOwner
         };
-
-        project.ProductOwner = productOwner;
+        
         project.TeamMembers.Add(developer);
-
+        project.AddSprint("Sprint 1", DateTime.Now, DateTime.Now.AddDays(7), Sprint.SprintType.DEVELOPMENT, scrumMaster);
+        var sprint = project.Sprints.First();
+        
         var item = new BacklogItem("Feature B", "Desc", developer, project);
-        var observer = new ReturnedToTodoObserver(project);
+        var observer = new ReturnedToTodoObserver(sprint);
 
         var output = ConsoleTestHelper.CaptureConsoleOutput(() =>
             observer.OnStateChanged(item, new TestingState(), new TodoState()));
 
-        Assert.Contains("[PO NOTIFY]", output);
-        Assert.Contains("PO", output);
+        Assert.Contains("[SM NOTIFY]", output);
+        Assert.Contains("SM", output);
         Assert.Contains("Feature B", output);
         Assert.Contains("TestingState", output);
         Assert.Contains("TodoState", output);
@@ -47,19 +47,20 @@ public class ReturnedToTodoObserverTests
 
         var productOwner = new User("PO", "po@test.com", false, strategy);
         var developer = new User("Dev", "dev@test.com", false, strategy);
-
-        var user = new User("Test", "test@test.com", false, new EmailNotificationStrategy());
+        var scrumMaster = new User("ScrumMaster", "amaster@test.com", false, strategy);
 
         var project = new Project("Project X", "Desc", "repo", new GitScm())
         {
-            ProductOwner = user
+            ProductOwner = productOwner
         };
-
-        project.ProductOwner = productOwner;
+        
         project.TeamMembers.Add(developer);
+        project.AddSprint("Sprint 1", DateTime.Now, DateTime.Now.AddDays(7), Sprint.SprintType.DEVELOPMENT, scrumMaster);
+        var sprint = project.Sprints.First();
+
 
         var item = new BacklogItem("Feature B", "Desc", developer, project);
-        var observer = new ReturnedToTodoObserver(project);
+        var observer = new ReturnedToTodoObserver(sprint);
 
         var output = ConsoleTestHelper.CaptureConsoleOutput(() =>
             observer.OnStateChanged(item, new DoingState(), new ReadyForTestingState()));

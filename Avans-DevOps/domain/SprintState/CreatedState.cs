@@ -8,7 +8,7 @@ public class CreatedState(Sprint sprint) : ISprintState
     {
         var item = new BacklogItem(name, description, member, project);
         
-        item.Subscribe(new ReturnedToTodoObserver(project));
+        item.Subscribe(new ReturnedToTodoObserver(sprint));
         item.Subscribe(new ReadyForTestingObserver(project));
         
         sprint.Backlog.AddItem(item);

@@ -1,6 +1,5 @@
 ﻿using Avans_DevOps.domain;
 using Avans_DevOps.domain.Notifications.Strategy;
-using Avans_DevOps.domain.SCM;
 using Avans_DevOps.Infrastructure;
 
 namespace UnitTests;
@@ -22,7 +21,7 @@ public static class ReportTestHelper
         project.TeamMembers.Add(alice);
         project.TeamMembers.Add(bob);
 
-        var sprint = new Sprint(project, "Sprint 1", DateTime.Now, DateTime.Now.AddDays(7), Sprint.SprintType.DEVELOPMENT);
+        var sprint = new Sprint(project, "Sprint 1", DateTime.Now, DateTime.Now.AddDays(7), Sprint.SprintType.DEVELOPMENT) {ScrumMaster = alice};
 
         return sprint;
     }

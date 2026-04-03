@@ -27,7 +27,7 @@ Backlogitem1.MarkTesting();
 Backlogitem1.MarkTested();
 Backlogitem1.ApproveDone();
 
-project.AddSprint("Sprint 1", DateTime.Now, DateTime.Now, Sprint.SprintType.DEVELOPMENT);
+project.AddSprint("Sprint 1", DateTime.Now, DateTime.Now, Sprint.SprintType.DEVELOPMENT, member2);
 project.Sprints[0].Backlog = project.ProductBacklog;
 
 Backlogitem1.AddActivity("First activity", member3);

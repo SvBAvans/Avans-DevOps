@@ -47,8 +47,8 @@ public class BacklogItem : IWorkable, IStateObservable
     {
         var activity = new Activity(title, member, this);
         
-        activity.Subscribe(new ReturnedToTodoObserver(Project));
         activity.Subscribe(new ReadyForTestingObserver(Project));
+        
         Activities.Add(activity);
     }
 

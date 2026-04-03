@@ -11,7 +11,7 @@ public class Project(string name, string description, string repositoryPath, ISc
     public string Description { get; } = description;
     public bool IsActive { get; private set; } = true;
     
-    public required User ProductOwner { get; set; }
+    public required User ProductOwner { get; init; }
     public List<User> TeamMembers { get; } = [];
     
     public Backlog ProductBacklog { get; } = new();
@@ -35,9 +35,12 @@ public class Project(string name, string description, string repositoryPath, ISc
         TeamMembers.Add(member);
     }
 
-    public void AddSprint(string name, DateTime startDate, DateTime endDate, Sprint.SprintType sprintType)
+    public void AddSprint(string name, DateTime startDate, DateTime endDate, Sprint.SprintType sprintType, User scrumMaster)
     {
-        Sprints.Add(new Sprint(this, name, startDate, endDate, sprintType));
+        Sprints.Add(new Sprint(this, name, startDate, endDate, sprintType)
+        {
+            ScrumMaster = scrumMaster
+        });
     }
     
     public void SetInactive()
@@ -49,7 +52,6 @@ public class Project(string name, string description, string repositoryPath, ISc
     {
         var item = new BacklogItem(title, description, member, this);
         
-        item.Subscribe(new ReturnedToTodoObserver(this));
         item.Subscribe(new ReadyForTestingObserver(this));
         
         ProductBacklog.AddItem(item);

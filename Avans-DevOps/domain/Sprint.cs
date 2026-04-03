@@ -14,6 +14,7 @@ public class Sprint
     public DateTime EndDate { get; set; }
     public Project Project { get; }
     public SprintType Type { get; }
+    public required User ScrumMaster { get; init; }
 
     private ISprintState _state;
     
